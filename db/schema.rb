@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213204155) do
+ActiveRecord::Schema.define(version: 20161213205225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 20161213204155) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "exercise_exercise_types", force: :cascade do |t|
+    t.integer  "exercise_id"
+    t.integer  "exercise_type_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["exercise_id"], name: "index_exercise_exercise_types_on_exercise_id", using: :btree
+    t.index ["exercise_type_id"], name: "index_exercise_exercise_types_on_exercise_type_id", using: :btree
   end
 
   create_table "exercise_muscles", force: :cascade do |t|
@@ -48,6 +57,8 @@ ActiveRecord::Schema.define(version: 20161213204155) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "exercise_exercise_types", "exercise_types"
+  add_foreign_key "exercise_exercise_types", "exercises"
   add_foreign_key "exercise_muscles", "exercises"
   add_foreign_key "exercise_muscles", "muscles"
 end
