@@ -1,7 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+bb = Equipment.create!(name: 'Barbell')
+
+bp = Exercise.create!(name: 'Bench Press', equipment: bb)
+s = Exercise.create!(name: 'Squat', equipment: bb)
+dl = Exercise.create!(name: 'Deadlift', equipment: bb)
+
+hs = Muscle.create!(name: 'Hamstrings')
+q = Muscle.create!(name: 'Quadriceps')
+c = Muscle.create!(name: 'Chest')
+
+et = ExerciseType.create!(name: 'Strength')
+
+bp.exercise_exercise_types.create!(exercise_type: et)
+s.exercise_exercise_types.create!(exercise_type: et)
+dl.exercise_exercise_types.create!(exercise_type: et)
+
+bp.exercise_muscles.create!(muscle: c)
+s.exercise_muscles.create!(muscle: q)
+dl.exercise_muscles.create!(muscle: hs)
