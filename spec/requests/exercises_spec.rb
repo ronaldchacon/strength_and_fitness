@@ -65,5 +65,22 @@ RSpec.describe 'Exercises', type: :request do
         end
       end
     end
+
+    describe 'sorting' do
+      context 'with valid column name "id"' do
+        it 'sorts the exercises by "id desc"' do
+          get('/api/exercises?sort=id&dir=desc')
+          expect(json_body['data'].first['id']).to eq deadlift.id.to_s
+          expect(json_body['data'].last['id']).to eq bench_press.id.to_s
+        end
+      end
+
+      context 'with invalid column name "fid"' do
+        it 'gets "400 Bad Request" back' do
+          get '/api/exercises?sort=fid&dir=asc'
+          expect(response.status).to eq 400
+        end
+      end
+    end
   end
 end

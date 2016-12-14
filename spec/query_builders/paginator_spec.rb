@@ -5,9 +5,9 @@ RSpec.describe Paginator do
 
   let(:exercises) { [bench_press, squat, deadlift] }
 
-  let(:scope) { Exercise.all }
-  let(:params) { { 'page' => '1', 'per' => '2' } }
-  let(:paginator) { Paginator.new(scope, params, 'url') }
+  let(:scope) { Exercise }
+  let(:params) { { 'page' => { 'number' => '1', 'size' => '2' } } }
+  let(:paginator) { Paginator.new(scope, params) }
   let(:paginated) { paginator.paginate }
 
   before { exercises }
